@@ -1,8 +1,9 @@
 # FoodForAll
 Around the world, more than 800 million people go to bed hungry every day. That is roughly one in every 10 people remain hungry in the globe. Hunger still remains one of the biggest problems in the world.
+
 Greatest paradox is roughly one third of the food produced in the world for human consumption every year gets lost or wasted. The food wastage in an year is equivalent to more than half of the world's annual cereals crop (2.3 billion tonnes in 2009/2010). Food losses and waste amounts to roughly US$ 680 billion in industrialized countries and US$ 310 billion in developing countries.
 
-Any technology realizes once it is able to touch upon the elementary issues of the soceity
+The real meaning of a disruptive technology like blockchain is realized when it touches the heart of poorest of the poor. A blockchain network like ethereum is an ideal platform to address this problem. 
 
 ### What is FoodForAll
 FoodForAll is a decentralized food assimilation, recovery and delivery network, which addresses the issue of food security by intervening in food wastage and utilize existing resources to create more food secure communities.
@@ -37,7 +38,7 @@ Setup a truffle development environement mentioned in the project documentaion. 
 #### Compile, migrate and deploy smart contract 
 
 ```
-ganache-cli  - Run  blockchain locally
+ganache-cli   (Run blockchain locally)
 connect metamask to this blockchain network
 > truffle migrate
 > npm run start
@@ -46,5 +47,13 @@ access the app in  http://localhost:3000
 
 #### Smart contract test
 ```
->truffle test
+> truffle test
 ```
+## Operational workflow
+This is the basic front end operational procedure to interact with the localy deploye contract(ganache-cli). 
+
+![alt text](https://github.com/Sij-dev/FoodForAll/blob/master/docs/FFA_CampaignWorkflow.png)
+
+![Alt text](./docs/FFA_CampaignWorkflow.png?raw=true "Operational Workflow")
+
+
