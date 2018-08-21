@@ -54,6 +54,42 @@ This is the basic front end operational procedure to interact with the localy de
 
 ![alt text](https://github.com/Sij-dev/FoodForAll/blob/master/docs/FFA_CampaignWorkflow.png)
 
-![Alt text](./docs/FFA_CampaignWorkflow.png?raw=true "Operational Workflow")
+## Operational procedure
+1.	User signup ( first time) 
+    - User needs to provide user name ( address picks up from metamask)
+    - Avatar-profile pic ( uploads to IPFS – Domonstrat IPFS capabilities) 
+    - Once IPFS upload over, User can submit the form. ( Submit button will be enabled only after upload is completed)
+    Note : IPFS code is in “./src/user/ui/signupform/SignUpForm.js”
+
+2.	User Login ( alredy registered user address ) 
+    - Click login button, it will authenticate the registered user(picks up the address from metamask)  and redirect to Dashboard
+    - Dashboard displays username and address.
+
+3.	Dashboard
+    - User can contribute to this movement by 
+    - Creating food request ( implemented in frontend and backend)
+    - Volunteering food supply ( implemented only in backend(contracts)- To Be done in frontend)
+    - Volunteering delivery of food from the supplier location to delivery location set by the requester ( implemented only in backend(contracts)- To Be done in frontend)
+
+4.	Create New Food For all Campaign 
+(Click the button -This is the only option available in the frontend for the time being
+   - Enter the required fields
+   - How many people required food ( enter a number between 1 -5000)
+   - Enter delivery point contact phone no. 
+   - Enter delivery location address 
+   - Enter date and time in specified format
+   - Click the submit button
+Note :  Minimum validity checks implemented in the frontend
+
+5.	Campaign List
+    - List all the created campaigns. 
+
+6.	Profile 
+    - User can update the username . 
+7.	Logout
+    - Loout the user.
+
+Note : Only user authentication and campaign creations functions has been implmented in the front-end. Complete contract workflow only implemented in the smart contracts and can be tested using truffle test (Given less importance to front-end development due to time constraints and the course focus only on solidity smart contract development )
+
 
 
