@@ -39,6 +39,10 @@ CircutBreaker (Pausable) has been implemented to restrict the attack till we upg
 
 “Pausable” contract has been inherited ( EthPM package manager library) to implement the EmergencyStop functionality in UserMgmt and CampaignFactory contracts. Once “Paused” (Stoped in case of emergency) creation of new contracts, update of the mastercontract, user signup, update or delete functionality has been stopped. Only owner can pause (or unpause) during emergency. Modifier “WhenNotPaused()” used to implement this functionality.
 
+### Ownership
+
+This has been used to limits access to certain critical functions to only the owner of the contract.
+
 ### DelegateProxy Pattern (Upgradability pattern)
 
 Delegate proxy pattern has been used primarily to overcome the problem of in place upgrade of an existing contract by migrating the data. Also we have to address high overall cost of deployment. 
