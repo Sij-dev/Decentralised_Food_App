@@ -134,7 +134,7 @@ FFACampain implements following workflow functionalities,
 - Other supporting set/get functionalities. 
 (Please refer Design diagram for details)
 
-####### FoodForAll Campaign-  Contracts Design Diagram
+##### FoodForAll Campaign-  Contracts Design Diagram
 
 ![alt text](https://github.com/Sij-dev/FoodForAll/blob/master/docs/FFA_CampaignWorkflow-FFA_UML.png)
 
@@ -142,7 +142,7 @@ FFACampain implements following workflow functionalities,
 
 Factory contract creates FFACampign and track the deployed contracts. This uses FFACampaignProxy (initialisation logic of FFACampaign implemented in proxy contract) to create new FFACampaigns. Factor contracts also manges the users access using UserMgmt contract. (Pleae refer Design diagrams)
 
-####### CampaignFactor and UserMgmt Design Diagram
+##### CampaignFactor and UserMgmt Design Diagram
 
 ![alt text](https://github.com/Sij-dev/FoodForAll/blob/master/docs/FFA_CampaignWorkflow-FFA_Factory.png)
 
