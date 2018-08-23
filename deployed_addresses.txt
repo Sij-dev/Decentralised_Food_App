@@ -1,5 +1,5 @@
-FoodForAllCampaign: 0x8128c7f1ba348d29187791ed638aab176214b9d1
-CampaignFactory: 0xdc1ec14798981105e70755de878c61d35a0e39aa
+FoodForAllCampaign: 0x1c7e5bff509df441f2ff14802fc11dfa5adef3ad
+CampaignFactory: 0x1289778e34af32ba4924c137e030cd7c5f3df1d7
 
 
 //// -- Rinkeby log --------
@@ -8,20 +8,20 @@ Using network 'rinkeby'.
 
 Running migration: 1_initial_migration.js
   Deploying Migrations...
-  ... 0xb6a10de6383eae304f8f847a2144c37005afd0ed47f021e18a6b424abf63329a
-  Migrations: 0x21897f7eb746e00e7f78f39b22e471bfec158ffc
+  ... 0x5d87925eea1b267f97cd311f338ef3e75b315f1b79c07d7dbfc17ed734746be0
+  Migrations: 0x5a400e08041f0f1d33dc42bbda81c01e9c1f5cf8
 Saving successful migration to network...
-  ... 0x002f356039c0acbdc9894f521460657da7f1d2919e3f5ac7e92d62e2824b335f
+  ... 0xa911b2a9e0e4ab578a39ef81f5e12cdc3c4b4498d3238f1414a757d8bd3d6249
 Saving artifacts...
 Running migration: 2_deploy_contracts.js
   Deploying FoodForAllCampaign...
-  ... 0xddaa8af1032d66bbe212242cfa155441c4d814f045cb60e66697fd92ea495f02
-  FoodForAllCampaign: 0x8128c7f1ba348d29187791ed638aab176214b9d1
+  ... 0x5748b49be6b39fe830483721c0fc9aa49d1b89f2894b70d4d2357f5ed65016c5
+  FoodForAllCampaign: 0x1c7e5bff509df441f2ff14802fc11dfa5adef3ad
   Deploying CampaignFactory...
-  ... 0x740c0d3ef7b740b10b87189e8080e03fd2fb49122411502eadf6a4b7d67bada0
-  CampaignFactory: 0xdc1ec14798981105e70755de878c61d35a0e39aa
+  ... 0xde040a8c9527dffcbacd4677da4786f756f42cda9464201c8f2fef2bcbdaeafc
+  CampaignFactory: 0x1289778e34af32ba4924c137e030cd7c5f3df1d7
 Saving successful migration to network...
-  ... 0xc9d059f3db7e3cafd362a197b08c931743c2379154cdbfd1da97637de4d819c2
+  ... 0x734c6f42de1d02a059ec391fccefa96a3a61995bedf5f277bcc073f81dd2f6fb
 Saving artifacts...
 
 //////
