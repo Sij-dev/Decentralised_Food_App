@@ -1,6 +1,6 @@
 /**
  * @description Unit tests for verifying the 'food for all' contract factory
- * @author Sijesh P 
+ * @author Sijesh P <sijesh.poovalapil@gmail.com>
  */
 
 const FoodForAllCampaign = artifacts.require("FoodForAllCampaign");
@@ -26,7 +26,7 @@ contract('FoodForAll Campaign Factory Contract test', async (accounts) => {
   })
   
   //Create a new proxy contract instance using factory contract 
-  it("New campaign creation using factory contract", async () => {
+  it("CampaignFactory:New campaign creation using factory contract", async () => {
 
     let newContractTxnResult = await ffaFactoryInstance.foodForAllCreateNewCampaign(
       "FoodRequester1",
@@ -44,7 +44,7 @@ contract('FoodForAll Campaign Factory Contract test', async (accounts) => {
    * test to access the FoodForAllCampaign using proxy and ensure requester details set properly in 
    * the storage 
    */
-  it("Access FoodForAllCampaign contract created through factory, by mapping proxy", async () => {
+  it("CampaignFactory:Access FoodForAllCampaign contract created through factory, by mapping proxy", async () => {
 
     let newContractTxnResult = await ffaFactoryInstance.foodForAllCreateNewCampaign(
       "FoodRequester1",
@@ -64,7 +64,7 @@ contract('FoodForAll Campaign Factory Contract test', async (accounts) => {
    *  Create multiple contract and get the deployed contract details 
    *  the storage 
    */
-  it("Create multiple contract and verify the created contract address ", async () => {
+  it("CampaignFactory:Create multiple contract and verify the created contract address ", async () => {
 
     let ContractTxnResult3 = await ffaFactoryInstance.foodForAllCreateNewCampaign(
       "FoodRequester1",
@@ -101,14 +101,14 @@ contract('FoodForAll Campaign Factory Contract test', async (accounts) => {
 
   });
 
-  it("Validate the deployed contract count ", async () => {
+  it("CampaignFactory: Validate the deployed contract count ", async () => {
     // Created 5 contracts prior to this test case
     let requesterDetails=  await ffaFactoryInstance.getTotalDeployedFoodCampaigns.call();
     assert.equal(requesterDetails,5,"Created 5 contracts prior to this test case, testcase position dependancy");
 
   });
 
-  it("Validate the deployed contract withIndex ", async () => {
+  it("CampaignFactory:Validate the deployed contract withIndex ", async () => {
     // Created 5 contracts prior to this test case
     let ContractTxnResult6 = await ffaFactoryInstance.foodForAllCreateNewCampaign(
       "FoodRequester3",
@@ -121,6 +121,53 @@ contract('FoodForAll Campaign Factory Contract test', async (accounts) => {
 
     let contractAddressWithIndex=  await ffaFactoryInstance.getDeployedFoodCampaignWithIndex.call(5);
     assert.equal(deployedContractAddress6,contractAddressWithIndex,"DeployedContractAddress withIndex get error");
+  });
+
+  // Negative test cases 
+
+  it("CampaignFactory -ve : Max quanitiy of food request should not exeed 5000 ", async () => {
+    // Created 5 contracts prior to this test case
+    await assert.isRejected( ffaFactoryInstance.foodForAllCreateNewCampaign(
+      "FoodRequester3",
+      5001,            
+      1535461200, // Epoc time stamp
+      "945666266662", 
+      "lat : 65.0000 , long 35.4444"
+    )); 
+  });
+
+  it("CampaignFactory -ve : Requester name should not exceed 100 character ", async () => {
+    // Created 5 contracts prior to this test case
+    await assert.isRejected( ffaFactoryInstance.foodForAllCreateNewCampaign(
+      "kasjdfklasdjflkdjsalkfjdslkafjlkdsajflkdsjaflkjdsalfkjdslkfjadsiajskdfkdsajiouoiuoiuiouiouoiu9uu987jhkjhiujkjk;uio",
+      30,            
+      1535461200, // Epoc time stamp
+      "94566626666298", 
+      "lat : 65.0000 , long 35.4444"
+    )); 
+  });
+
+  it("CampaignFactory -ve: Contract number should not exceed 30 character ", async () => {
+    // Created 5 contracts prior to this test case
+    await assert.isRejected( ffaFactoryInstance.foodForAllCreateNewCampaign(
+      "FoodRequester3",
+      30,            
+      1535461200, // Epoc time stamp
+      "9456662666945666266694566626669", 
+      "lat : 65.0000 , long 35.4444"
+    )); 
+  });
+
+  it("CampaignFactory -ve: Contract time should not excedd more than 30 days ", async () => {
+    let time = (Date.parse('28 Oct 2018 13:00:00 GMT')/1000);
+    // Created 5 contracts prior to this test case
+    await assert.isRejected( ffaFactoryInstance.foodForAllCreateNewCampaign(
+      "FoodRequester3",
+      30,            
+      time, // Epoc time stamp
+      "945666266", 
+      "lat : 65.0000 , long 35.4444"
+    )); 
   });
 
 });

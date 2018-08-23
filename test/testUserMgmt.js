@@ -38,20 +38,20 @@ contract('User management functionality test', async (accounts) => {
     })
 
     // signup new user and check the user count updated properly 
-    it(" Test the user signUp", async () => {
+    it(" UserMgmt: Test the user signUp", async () => {
       assert.ok(await ffaFactoryInstance.userSignup(userName1,useremail1,userPhone1,useripfsHash1,{from: userAddress1}));
       let userCount = await ffaFactoryInstance.getUserCount();
       assert.equal(userCount,1,"User  not updated");
     });
 
     // login with earlier signed up address.
-    it(" Test the user Login", async () => {
+    it(" UserMgmt: Test the user Login", async () => {
       let getUserLoginName = await ffaFactoryInstance.userLogin({from :userAddress1});
       assert.equal(web3.toUtf8(getUserLoginName),userName1,"Signup is not success");
     });
 
     // Test the user update functionality, verify updated in storage properly use getUserSummary
-    it(" Test the user Update ", async () => {
+    it(" UserMgmt: Test the user Update ", async () => {
       let Name2,email2,Phone2, ipfsHash2;
       await ffaFactoryInstance.userUpdate(userName2,useremail2,userPhone2,{from: userAddress1});
       [Name2,email2,Phone2,ipfsHash2] = await ffaFactoryInstance.getUserSummary(userAddress1,{from: userAddress1});
@@ -59,7 +59,7 @@ contract('User management functionality test', async (accounts) => {
     });
     
     //  Test user index functionality 
-    it(" Test the user index update in storage", async () => {
+    it(" UserMgmt: Test the user index update in storage", async () => {
       assert.ok(await ffaFactoryInstance.userSignup(userName2,useremail2,userPhone2,useripfsHash2,{from: userAddress2}));
       let index = await ffaFactoryInstance.getUserIndex({from :userAddress2});
       let getUserAddress = await ffaFactoryInstance.getUserAddressAtIndex(index,{from :userAddress2});
@@ -67,7 +67,7 @@ contract('User management functionality test', async (accounts) => {
     });
     
     //  Test user delete functionality 
-    it(" Test the user delete functionaliy and verify the storage update", async () => {
+    it(" UserMgmt: Test the user delete functionaliy and verify the storage update", async () => {
       let userCountBefore = await ffaFactoryInstance.getUserCount();
       assert.ok(await ffaFactoryInstance.deleteUser({from: userAddress2}));
       let userCountAfter = await ffaFactoryInstance.getUserCount();
@@ -75,31 +75,52 @@ contract('User management functionality test', async (accounts) => {
     });
 
     //Negative test cases - only non registered user should signup
-    it(" Signup should not allow for already registered user ", async () => {
+    it(" UserMgmt:Signup should not allow for already registered user ", async () => {
       await assert.isRejected(ffaFactoryInstance.userSignup(userName1,useremail1,userPhone1,useripfsHash1,{from: userAddress1}));
     });
 
     //Negative test cases - only egistered user should be able to login
-    it(" Login should not allow for non-registered user  ", async () => {
+    it(" UserMgmt: Login should not allow for non-registered user  ", async () => {
       await assert.isRejected(ffaFactoryInstance.userLogin({from :userAddress2}));
     });
 
     //Negative test cases - only registered user should be able to update the record.
-    it(" Update should not allow for non-registered user  ", async () => {
+    it("UserMgmt:  Update should not allow for non-registered user  ", async () => {
       await assert.isRejected(ffaFactoryInstance.userUpdate(userName2,useremail2,userPhone2,{from: userAddress2}));
     });
     
     //Negative test cases - a user able to delete only his record.
-    it(" Update should not allow for non-registered user  ", async () => {
+    it(" UserMgmt: Update should not allow for non-registered user  ", async () => {
       await assert.isRejected(ffaFactoryInstance.deleteUser({from: userAddress2}));
     });
 
     //  Test to delete last user (Boundary condition).
-    it(" Test - Delete the only exisiting user.(Boundary condition)", async () => {
+    it(" UserMgmt: Test - Delete the only exisiting user.", async () => {
       let userCountBefore = await ffaFactoryInstance.getUserCount();
       await ffaFactoryInstance.deleteUser({from: userAddress1});
       assert.equal(userCountBefore-1,0,"Last user - Not able to delete only last existing user");
     });
+
+      //Negative test cases - Update should not allow invalide user name
+      it(" UserMgmt: Update should not allow invalide user name ", async () => {
+        await assert.isRejected(ffaFactoryInstance.updateUserName("",{from: userAddress1}));
+      });
+
+      //Negative test cases - Update should not allow invalide user email
+      it(" UserMgmt: Update should not allow invalide user email ", async () => {
+        await assert.isRejected(ffaFactoryInstance.updateUserEmail("",{from: userAddress1}));
+      });
+
+      //Negative test cases - Update should not allow invalide phone number
+      it(" UserMgmt: Update should not allow invalide phone number ", async () => {
+        await assert.isRejected(ffaFactoryInstance.updateUserPhoneNo("",{from: userAddress1}));
+      });
+        
+      //Negative test cases - Update should not allow invalide ipfs link
+      it(" UserMgmt: Update should not allow invalide ipfs hash ", async () => {
+        await assert.isRejected(ffaFactoryInstance.updateUserAvatar("",{from: userAddress1}));
+      });
+              
   
     
 })

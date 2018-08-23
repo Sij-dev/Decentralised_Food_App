@@ -140,7 +140,7 @@ contract UserMgmt is Pausable {
         whenNotPaused()
         returns(bool success)
     {
-        
+        require (_userName != 0x0,"Not a valid user name");
         users[msg.sender].userName = _userName;
         return true;
     }
@@ -153,6 +153,7 @@ contract UserMgmt is Pausable {
         whenNotPaused()
         returns(bool success)
     {
+        require (_userEmail != 0x0,"Not a valid email name");
         users[msg.sender].userEmail = _userEmail;
         return true;
     }
@@ -165,7 +166,7 @@ contract UserMgmt is Pausable {
         whenNotPaused()
         returns(bool success)
     {
-    
+        require (_userPhoneNo != 0x0,"Not a valid phone number");
         users[msg.sender].userPhoneNo = _userPhoneNo;
         return true;
     }
@@ -179,6 +180,7 @@ contract UserMgmt is Pausable {
         returns(bool success)
     {
         
+        require (_avatarIpfsHash != 0x0,"Not a valid ipfs tag");
         users[msg.sender].avatarIpfsHash = _avatarIpfsHash;
         return true;
     }

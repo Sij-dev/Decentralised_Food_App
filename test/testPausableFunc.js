@@ -26,7 +26,7 @@ contract('Test Circuit Breakers-stop execution if certain conditions are met', a
     });
 
     //Pause the contract in case of emergency 
-    it("Pause the contract in case of emergency and should not allcw to create new ffa_Campaign", async () => {
+    it("Circuit Breaker:Pause the contract in case of emergency and should not allcw to create new ffa_Campaign", async () => {
         ffaFactoryInstance.pause();
         // new campaign shold fail
         await assert.isRejected(
@@ -42,7 +42,7 @@ contract('Test Circuit Breakers-stop execution if certain conditions are met', a
     });
 
     // Unpause the contract and create new contract.
-    it("UnPause the contract once the emergency is over and create new campaign", async () => {
+    it("Circuit Breaker: UnPause the contract once the emergency is over and create new campaign", async () => {
         ffaFactoryInstance.unpause();
         let newContractTxnResult = await ffaFactoryInstance.foodForAllCreateNewCampaign(
             "FoodRequesterUnPause",
@@ -57,7 +57,7 @@ contract('Test Circuit Breakers-stop execution if certain conditions are met', a
     });
 
     // Test circuit breaker , Signup should not allow in case of emergency 
-    it("Pause  in case of emergency and should not allcw to create new user", async () => {
+    it("Circuit Breaker: Pause in case of emergency and should not allcw to create new user", async () => {
         await ffaFactoryInstance.pause();
         //if pause is enabled, even owner can not create new user. below tried to create using "coinbase"
         await assert.isRejected( 
@@ -71,20 +71,20 @@ contract('Test Circuit Breakers-stop execution if certain conditions are met', a
         );
     });
     // Test circuit breaker , if already Paused, should not pause again 
-    it("Already emergency stopped, should not allcw to stop again", async () => {
+    it("Circuit Breaker: Already emergency stopped, should not allcw to stop again", async () => {
         await assert.isRejected(ffaFactoryInstance.pause({from: coinbase}));
         await ffaFactoryInstance.unpause({from:coinbase});
     });
 
     // Test circuit breaker , Only contract deployer shold Emergency Pause/UnPause
-    it("Only contract deployer shold Emergency Pause/UnPause", async () => {
+    it("Circuit Breaker: Only contract deployer shold Emergency Pause/UnPause", async () => {
         await assert.isRejected(ffaFactoryInstance.pause({from:userAddress1 }));
         // by default, sender is coinbase i.e deployer.
         await ffaFactoryInstance.pause();
     });
 
     // Test circuit breaker , Update should not allow in case of emergency 
-    it("Pause  in case of emergency and should not allcw to update user info", async () => {
+    it("Circuit Breaker: Pause  in case of emergency and should not allcw to update user info", async () => {
        // already paused in previous test case.
         await assert.isRejected( 
             ffaFactoryInstance.userUpdate(
@@ -101,7 +101,7 @@ contract('Test Circuit Breakers-stop execution if certain conditions are met', a
      * Test circuit breaker, User delete should not allow in case of emergency 
      * After unPause create new user and delete the created user.
      */
-    it("Pause in case of emergency and should not allcw to delete user info", async () => {
+    it("Circuit Breaker: Pause in case of emergency and should not allcw to delete user info", async () => {
         await ffaFactoryInstance.unpause({from:coinbase});
         await ffaFactoryInstance.userSignup(
             "userName1",

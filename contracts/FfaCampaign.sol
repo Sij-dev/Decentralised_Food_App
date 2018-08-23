@@ -122,11 +122,11 @@ contract FoodForAllCampaignProxy is Proxy, FoodForAllCampaignDataInternal {
         ProxyOwnableData(_contractOwner)
     {
         //user input overflow check
-        require(bytes(_requesterName).length < 200 ,"input string is too large");
-        require(bytes(_deliveryPointContactNo).length < 200 ,"input string is too large");
-        require(bytes(_locationAddr).length < 500 ,"input string is too large");
+        require(bytes(_requesterName).length < 100 ,"input string is too large");
+        require(bytes(_deliveryPointContactNo).length < 30 ,"input string is too large");
+        require(bytes(_locationAddr).length < 250 ,"input string is too large");
         // requester make foodrequest for next 30 days max
-        require (deliverytime < (now + 30 days),"food request restricted for next 30 days");
+        require (_deliverytime < (now + 30 days),"food request restricted for next 30 days");
         //limiting the user input
         require (_quantity>0 && _quantity<5000, "Food quantity limited between 1 to 5000");
         requesterAddress = _requesterAddress;
@@ -195,7 +195,7 @@ contract FoodForAllCampaign is UpdatableProxyImplementation,FoodForAllCampaignDa
       */
     function setFfaExpectedProductionReadyTime(uint _productionReadyTime) public {
         require(msg.sender == producerAddress,"Only producer should set the time");
-        require (_productionReadyTime < (now + 30 days),"expeceted prod ready time should be with in 20 days");
+        require (_productionReadyTime < (now + 30 days),"expeceted prod ready time should be with in 30 days");
         productionReadyTime = _productionReadyTime;
         emit FoodProductionReadyTimeSet(msg.sender, productionReadyTime);
     }
@@ -205,7 +205,7 @@ contract FoodForAllCampaign is UpdatableProxyImplementation,FoodForAllCampaignDa
       */
     function setFfaDeliveryPickTime(uint _deliveryPickTime) public {
         require(msg.sender == deliveryPersonAddress,"Only deliveryPer should set the time");
-        require (_deliveryPickTime < (now + 30 days),"delivery time should be with in 20 days");
+        require (_deliveryPickTime < (now + 30 days),"delivery time should be with in 30 days");
         deliveryPickTime = _deliveryPickTime;
         emit FoodDeliveryPickUpTimeSet(msg.sender, deliveryPickTime);
     }

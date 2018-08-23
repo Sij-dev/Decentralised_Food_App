@@ -214,6 +214,34 @@ contract('FoodForAll CampaignContract test', async (accounts) => {
     });
 
     /** 
+     * Negative test cases - Only Producer can update the prod ready time
+     * contract State order is not important to set the time
+     */
+    it(" FfaCampaign -ve test : Only producer should be able to update prod ready time ", async () => {
+            
+        let pickUpTime = (Date.parse('28 Aug 2018 13:00:00 GMT')/1000);
+        let ffaCampainMappedInstance = await FoodForAllCampaign.at(ffaProxy.address);
+        await ffaCampainMappedInstance.contributeByProduceFood ("Producer1",{from:producerAddr});
+        await ffaCampainMappedInstance.contributeByDeliverFood("DeliveryPerson1",{from:deliveryPerssonAddr})
+        await assert.isRejected(ffaCampainMappedInstance.setFfaExpectedProductionReadyTime(pickUpTime,{from:deliveryPerssonAddr}));
+     
+    });
+
+    /** 
+     * Negative test cases -  delivery picktime should be with in 30 day range
+     * contract State order is not important to set the time
+     */
+    it(" FfaCampaign -ve test : expected delivery should be with in 30 day range ", async () => {
+            
+        let pickUpTime = (Date.parse('28 Oct 2018 13:00:00 GMT')/1000);
+        let ffaCampainMappedInstance = await FoodForAllCampaign.at(ffaProxy.address);
+        await ffaCampainMappedInstance.contributeByProduceFood ("Producer1",{from:producerAddr});
+        await ffaCampainMappedInstance.contributeByDeliverFood("DeliveryPerson1",{from:deliveryPerssonAddr})
+        await assert.isRejected(ffaCampainMappedInstance.setFfaExpectedProductionReadyTime(pickUpTime,{from:producerAddr}));
+     
+    });
+
+    /** 
      * Negative test cases - Only contributers i.e requrester,producer or delivery person should be
      * be able to update the description
      */
