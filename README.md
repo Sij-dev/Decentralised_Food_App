@@ -19,7 +19,7 @@ Food chain will provide a platform for all these entities to interact, connect a
 
 ## Project setup 
 
-Setup a truffle development environement mentioned in the project documentaion. The following tools is mandatory to execute this project
+Setup a truffle development environement mentioned in the project documentaion. The following are the prerequisites to execute this project
 ```
 - Truffle
 - Metamask ( google chrome with metamask plugin)
@@ -58,8 +58,8 @@ This is the basic front end operational procedure to interact with the localy de
 1.	User signup 
     - User needs to provide user name ( address picks up from metamask)
     - Avatar-profile pic ( uploads to IPFS – Demonstrate IPFS capabilities) 
-    - Once IPFS upload over, User can submit the form. ( Submit button will be enabled only after upload is completed.Upload time varies depends on image size.)
-    Note : IPFS code is in “./src/user/ui/signupform/SignUpForm.js”
+    - Once IPFS upload over, User can submit the form. ( Submit button will be enabled only after upload is completed.Upload time varies depends on image size. Sometimes IPFS takes significant amount of time to upload.In that case you can commnet the IPFS related code in “./src/user/ui/signupform/SignUpForm.js”. )
+  
 
 2.	User Login
     - Click login button, it will authenticate the registered user(picks up the address from metamask)  and redirect to Dashboard
