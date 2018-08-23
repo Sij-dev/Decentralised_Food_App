@@ -1,4 +1,4 @@
-//const HDWalletProvider = require('truffle-hdwallet-provider');
+const HDWalletProvider = require('truffle-hdwallet-provider');
 const mnemonic = 'call glow acoustic vintage front ring trade assist shuffle mimic volume reject';
 
 
@@ -11,17 +11,16 @@ module.exports = {
       gas: 4500000,
       gasPrice: 25000000000,
       network_id: '*' 
-    }
-    // ,
-    // rinkeby: {
-    //   // added  to terminate the console.
-    //   provider: function() {
-    //     return new HDWalletProvider(mnemonic, 'https://rinkeby.infura.io/orDImgKRzwNrVCDrAk5Q');
-    //   },
-    //   network_id: '4',
-    //   gas: 4700000,
-    //   gasPrice: 25000000000
-    // } 
+    },
+    rinkeby: {
+      // added  to terminate the console.
+      provider: function() {
+        return new HDWalletProvider(mnemonic, 'https://rinkeby.infura.io/orDImgKRzwNrVCDrAk5Q');
+      },
+      network_id: '4',
+      gas: 4700000,
+      gasPrice: 25000000000
+    } 
 
 
     // mainnet: {
