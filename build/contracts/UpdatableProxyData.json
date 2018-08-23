@@ -1,0 +1,1753 @@
+{
+  "contractName": "UpdatableProxyData",
+  "abi": [],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.24;\nimport \"./Proxy.sol\";\nimport \"./ProxyOwnable.sol\";\n\n/** \n * @title Update - Interface\n * This is an interface which will help to upgrade the contract\n * This helps to migrate storage state during an update.\n */\ninterface Update {\n    function implementationBefore() external view returns (address);\n    function implementationAfter() external view returns (address);\n    function migrateData() external;\n}\n\n//Data keeps seperate for inheritance - data and logic sepration for upgradability\ncontract UpdatableProxyData is ProxyData, ProxyOwnableData {}\n\n// Implementes Update interface, upgraded the contract and migrate the data from old contract\ncontract UpdatableProxyShared is ProxyData, ProxyOwnable {\n    \n    function updateMasterCopy(Update update)\n        public\n        onlyUpgradeOwner\n    {\n        //masterCopy = newMasterCopy;\n        require(update.implementationBefore() == masterCopy);\n        masterCopy = update;\n        Update(this).migrateData();\n        masterCopy = update.implementationAfter();\n\n    }\n}\n\ncontract UpdatableProxyImplementation is UpdatableProxyShared {\n    constructor() public ProxyOwnableData(0) {}\n}",
+  "sourcePath": "/Users/sijeshp/ConsensysAcademy/Code/Projects/projectSubmit/FoodForAll/contracts/utils/UpdatableProxy.sol",
+  "ast": {
+    "absolutePath": "/Users/sijeshp/ConsensysAcademy/Code/Projects/projectSubmit/FoodForAll/contracts/utils/UpdatableProxy.sol",
+    "exportedSymbols": {
+      "UpdatableProxyData": [
+        1874
+      ],
+      "UpdatableProxyImplementation": [
+        1921
+      ],
+      "UpdatableProxyShared": [
+        1911
+      ],
+      "Update": [
+        1869
+      ]
+    },
+    "id": 1922,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1853,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:10"
+      },
+      {
+        "absolutePath": "/Users/sijeshp/ConsensysAcademy/Code/Projects/projectSubmit/FoodForAll/contracts/utils/Proxy.sol",
+        "file": "./Proxy.sol",
+        "id": 1854,
+        "nodeType": "ImportDirective",
+        "scope": 1922,
+        "sourceUnit": 1811,
+        "src": "25:21:10",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/sijeshp/ConsensysAcademy/Code/Projects/projectSubmit/FoodForAll/contracts/utils/ProxyOwnable.sol",
+        "file": "./ProxyOwnable.sol",
+        "id": 1855,
+        "nodeType": "ImportDirective",
+        "scope": 1922,
+        "sourceUnit": 1852,
+        "src": "47:28:10",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": "@title Update - Interface\nThis is an interface which will help to upgrade the contract\nThis helps to migrate storage state during an update.",
+        "fullyImplemented": false,
+        "id": 1869,
+        "linearizedBaseContracts": [
+          1869
+        ],
+        "name": "Update",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1860,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "implementationBefore",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1856,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "288:2:10"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1859,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1858,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1860,
+                  "src": "314:7:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1857,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "314:7:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "313:9:10"
+            },
+            "scope": 1869,
+            "src": "259:64:10",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1865,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "implementationAfter",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1861,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "356:2:10"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1864,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1863,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1865,
+                  "src": "382:7:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1862,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "382:7:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "381:9:10"
+            },
+            "scope": 1869,
+            "src": "328:63:10",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1868,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "migrateData",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1866,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "416:2:10"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1867,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "427:0:10"
+            },
+            "scope": 1869,
+            "src": "396:32:10",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1922,
+        "src": "236:194:10"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1870,
+              "name": "ProxyData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1782,
+              "src": "546:9:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ProxyData_$1782",
+                "typeString": "contract ProxyData"
+              }
+            },
+            "id": 1871,
+            "nodeType": "InheritanceSpecifier",
+            "src": "546:9:10"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1872,
+              "name": "ProxyOwnableData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1836,
+              "src": "557:16:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ProxyOwnableData_$1836",
+                "typeString": "contract ProxyOwnableData"
+              }
+            },
+            "id": 1873,
+            "nodeType": "InheritanceSpecifier",
+            "src": "557:16:10"
+          }
+        ],
+        "contractDependencies": [
+          1782,
+          1836
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1874,
+        "linearizedBaseContracts": [
+          1874,
+          1836,
+          1782
+        ],
+        "name": "UpdatableProxyData",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 1922,
+        "src": "515:61:10"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1875,
+              "name": "ProxyData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1782,
+              "src": "705:9:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ProxyData_$1782",
+                "typeString": "contract ProxyData"
+              }
+            },
+            "id": 1876,
+            "nodeType": "InheritanceSpecifier",
+            "src": "705:9:10"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1877,
+              "name": "ProxyOwnable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1851,
+              "src": "716:12:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ProxyOwnable_$1851",
+                "typeString": "contract ProxyOwnable"
+              }
+            },
+            "id": 1878,
+            "nodeType": "InheritanceSpecifier",
+            "src": "716:12:10"
+          }
+        ],
+        "contractDependencies": [
+          1782,
+          1836,
+          1851
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1911,
+        "linearizedBaseContracts": [
+          1911,
+          1851,
+          1836,
+          1782
+        ],
+        "name": "UpdatableProxyShared",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 1909,
+              "nodeType": "Block",
+              "src": "825:224:10",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 1890,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 1886,
+                              "name": "update",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 1880,
+                              "src": "881:6:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_Update_$1869",
+                                "typeString": "contract Update"
+                              }
+                            },
+                            "id": 1887,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "implementationBefore",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 1860,
+                            "src": "881:27:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
+                              "typeString": "function () view external returns (address)"
+                            }
+                          },
+                          "id": 1888,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "881:29:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "id": 1889,
+                          "name": "masterCopy",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1781,
+                          "src": "914:10:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "881:43:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 1885,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        2055,
+                        2056
+                      ],
+                      "referencedDeclaration": 2055,
+                      "src": "873:7:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 1891,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "873:52:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1892,
+                  "nodeType": "ExpressionStatement",
+                  "src": "873:52:10"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1895,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 1893,
+                      "name": "masterCopy",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1781,
+                      "src": "935:10:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 1894,
+                      "name": "update",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1880,
+                      "src": "948:6:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Update_$1869",
+                        "typeString": "contract Update"
+                      }
+                    },
+                    "src": "935:19:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 1896,
+                  "nodeType": "ExpressionStatement",
+                  "src": "935:19:10"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1898,
+                            "name": "this",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 2119,
+                            "src": "971:4:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_UpdatableProxyShared_$1911",
+                              "typeString": "contract UpdatableProxyShared"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_UpdatableProxyShared_$1911",
+                              "typeString": "contract UpdatableProxyShared"
+                            }
+                          ],
+                          "id": 1897,
+                          "name": "Update",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1869,
+                          "src": "964:6:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_Update_$1869_$",
+                            "typeString": "type(contract Update)"
+                          }
+                        },
+                        "id": 1899,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "964:12:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Update_$1869",
+                          "typeString": "contract Update"
+                        }
+                      },
+                      "id": 1900,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "migrateData",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1868,
+                      "src": "964:24:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                        "typeString": "function () external"
+                      }
+                    },
+                    "id": 1901,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "964:26:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1902,
+                  "nodeType": "ExpressionStatement",
+                  "src": "964:26:10"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1907,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 1903,
+                      "name": "masterCopy",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1781,
+                      "src": "1000:10:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [],
+                      "expression": {
+                        "argumentTypes": [],
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 1904,
+                          "name": "update",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1880,
+                          "src": "1013:6:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_Update_$1869",
+                            "typeString": "contract Update"
+                          }
+                        },
+                        "id": 1905,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "implementationAfter",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 1865,
+                        "src": "1013:26:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
+                          "typeString": "function () view external returns (address)"
+                        }
+                      },
+                      "id": 1906,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1013:28:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "1000:41:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 1908,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1000:41:10"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1910,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 1883,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 1882,
+                  "name": "onlyUpgradeOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1825,
+                  "src": "804:16:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "804:16:10"
+              }
+            ],
+            "name": "updateMasterCopy",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1881,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1880,
+                  "name": "update",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1910,
+                  "src": "766:13:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Update_$1869",
+                    "typeString": "contract Update"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1879,
+                    "name": "Update",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1869,
+                    "src": "766:6:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Update_$1869",
+                      "typeString": "contract Update"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "765:15:10"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1884,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "825:0:10"
+            },
+            "scope": 1911,
+            "src": "740:309:10",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1922,
+        "src": "672:379:10"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1912,
+              "name": "UpdatableProxyShared",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1911,
+              "src": "1094:20:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_UpdatableProxyShared_$1911",
+                "typeString": "contract UpdatableProxyShared"
+              }
+            },
+            "id": 1913,
+            "nodeType": "InheritanceSpecifier",
+            "src": "1094:20:10"
+          }
+        ],
+        "contractDependencies": [
+          1782,
+          1836,
+          1851,
+          1911
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1921,
+        "linearizedBaseContracts": [
+          1921,
+          1911,
+          1851,
+          1836,
+          1782
+        ],
+        "name": "UpdatableProxyImplementation",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 1919,
+              "nodeType": "Block",
+              "src": "1162:2:10",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 1920,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "30",
+                    "id": 1916,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "1159:1:10",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_0_by_1",
+                      "typeString": "int_const 0"
+                    },
+                    "value": "0"
+                  }
+                ],
+                "id": 1917,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 1915,
+                  "name": "ProxyOwnableData",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1836,
+                  "src": "1142:16:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_ProxyOwnableData_$1836_$",
+                    "typeString": "type(contract ProxyOwnableData)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1142:19:10"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1914,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1132:2:10"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1918,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1162:0:10"
+            },
+            "scope": 1921,
+            "src": "1121:43:10",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1922,
+        "src": "1053:113:10"
+      }
+    ],
+    "src": "0:1166:10"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/sijeshp/ConsensysAcademy/Code/Projects/projectSubmit/FoodForAll/contracts/utils/UpdatableProxy.sol",
+    "exportedSymbols": {
+      "UpdatableProxyData": [
+        1874
+      ],
+      "UpdatableProxyImplementation": [
+        1921
+      ],
+      "UpdatableProxyShared": [
+        1911
+      ],
+      "Update": [
+        1869
+      ]
+    },
+    "id": 1922,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1853,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:10"
+      },
+      {
+        "absolutePath": "/Users/sijeshp/ConsensysAcademy/Code/Projects/projectSubmit/FoodForAll/contracts/utils/Proxy.sol",
+        "file": "./Proxy.sol",
+        "id": 1854,
+        "nodeType": "ImportDirective",
+        "scope": 1922,
+        "sourceUnit": 1811,
+        "src": "25:21:10",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/Users/sijeshp/ConsensysAcademy/Code/Projects/projectSubmit/FoodForAll/contracts/utils/ProxyOwnable.sol",
+        "file": "./ProxyOwnable.sol",
+        "id": 1855,
+        "nodeType": "ImportDirective",
+        "scope": 1922,
+        "sourceUnit": 1852,
+        "src": "47:28:10",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": "@title Update - Interface\nThis is an interface which will help to upgrade the contract\nThis helps to migrate storage state during an update.",
+        "fullyImplemented": false,
+        "id": 1869,
+        "linearizedBaseContracts": [
+          1869
+        ],
+        "name": "Update",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1860,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "implementationBefore",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1856,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "288:2:10"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1859,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1858,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1860,
+                  "src": "314:7:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1857,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "314:7:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "313:9:10"
+            },
+            "scope": 1869,
+            "src": "259:64:10",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1865,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "implementationAfter",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1861,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "356:2:10"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1864,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1863,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1865,
+                  "src": "382:7:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1862,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "382:7:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "381:9:10"
+            },
+            "scope": 1869,
+            "src": "328:63:10",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1868,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "migrateData",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1866,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "416:2:10"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1867,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "427:0:10"
+            },
+            "scope": 1869,
+            "src": "396:32:10",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1922,
+        "src": "236:194:10"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1870,
+              "name": "ProxyData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1782,
+              "src": "546:9:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ProxyData_$1782",
+                "typeString": "contract ProxyData"
+              }
+            },
+            "id": 1871,
+            "nodeType": "InheritanceSpecifier",
+            "src": "546:9:10"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1872,
+              "name": "ProxyOwnableData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1836,
+              "src": "557:16:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ProxyOwnableData_$1836",
+                "typeString": "contract ProxyOwnableData"
+              }
+            },
+            "id": 1873,
+            "nodeType": "InheritanceSpecifier",
+            "src": "557:16:10"
+          }
+        ],
+        "contractDependencies": [
+          1782,
+          1836
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1874,
+        "linearizedBaseContracts": [
+          1874,
+          1836,
+          1782
+        ],
+        "name": "UpdatableProxyData",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 1922,
+        "src": "515:61:10"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1875,
+              "name": "ProxyData",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1782,
+              "src": "705:9:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ProxyData_$1782",
+                "typeString": "contract ProxyData"
+              }
+            },
+            "id": 1876,
+            "nodeType": "InheritanceSpecifier",
+            "src": "705:9:10"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1877,
+              "name": "ProxyOwnable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1851,
+              "src": "716:12:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ProxyOwnable_$1851",
+                "typeString": "contract ProxyOwnable"
+              }
+            },
+            "id": 1878,
+            "nodeType": "InheritanceSpecifier",
+            "src": "716:12:10"
+          }
+        ],
+        "contractDependencies": [
+          1782,
+          1836,
+          1851
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 1911,
+        "linearizedBaseContracts": [
+          1911,
+          1851,
+          1836,
+          1782
+        ],
+        "name": "UpdatableProxyShared",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 1909,
+              "nodeType": "Block",
+              "src": "825:224:10",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 1890,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 1886,
+                              "name": "update",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 1880,
+                              "src": "881:6:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_Update_$1869",
+                                "typeString": "contract Update"
+                              }
+                            },
+                            "id": 1887,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "implementationBefore",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 1860,
+                            "src": "881:27:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
+                              "typeString": "function () view external returns (address)"
+                            }
+                          },
+                          "id": 1888,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "881:29:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "id": 1889,
+                          "name": "masterCopy",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1781,
+                          "src": "914:10:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "881:43:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 1885,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        2055,
+                        2056
+                      ],
+                      "referencedDeclaration": 2055,
+                      "src": "873:7:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 1891,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "873:52:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1892,
+                  "nodeType": "ExpressionStatement",
+                  "src": "873:52:10"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1895,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 1893,
+                      "name": "masterCopy",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1781,
+                      "src": "935:10:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 1894,
+                      "name": "update",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1880,
+                      "src": "948:6:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Update_$1869",
+                        "typeString": "contract Update"
+                      }
+                    },
+                    "src": "935:19:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 1896,
+                  "nodeType": "ExpressionStatement",
+                  "src": "935:19:10"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1898,
+                            "name": "this",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 2119,
+                            "src": "971:4:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_UpdatableProxyShared_$1911",
+                              "typeString": "contract UpdatableProxyShared"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_UpdatableProxyShared_$1911",
+                              "typeString": "contract UpdatableProxyShared"
+                            }
+                          ],
+                          "id": 1897,
+                          "name": "Update",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1869,
+                          "src": "964:6:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_Update_$1869_$",
+                            "typeString": "type(contract Update)"
+                          }
+                        },
+                        "id": 1899,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "964:12:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Update_$1869",
+                          "typeString": "contract Update"
+                        }
+                      },
+                      "id": 1900,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "migrateData",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 1868,
+                      "src": "964:24:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                        "typeString": "function () external"
+                      }
+                    },
+                    "id": 1901,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "964:26:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1902,
+                  "nodeType": "ExpressionStatement",
+                  "src": "964:26:10"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1907,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 1903,
+                      "name": "masterCopy",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1781,
+                      "src": "1000:10:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [],
+                      "expression": {
+                        "argumentTypes": [],
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 1904,
+                          "name": "update",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1880,
+                          "src": "1013:6:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_Update_$1869",
+                            "typeString": "contract Update"
+                          }
+                        },
+                        "id": 1905,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "implementationAfter",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 1865,
+                        "src": "1013:26:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
+                          "typeString": "function () view external returns (address)"
+                        }
+                      },
+                      "id": 1906,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1013:28:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "1000:41:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 1908,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1000:41:10"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1910,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 1883,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 1882,
+                  "name": "onlyUpgradeOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1825,
+                  "src": "804:16:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "804:16:10"
+              }
+            ],
+            "name": "updateMasterCopy",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1881,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1880,
+                  "name": "update",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1910,
+                  "src": "766:13:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Update_$1869",
+                    "typeString": "contract Update"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 1879,
+                    "name": "Update",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1869,
+                    "src": "766:6:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Update_$1869",
+                      "typeString": "contract Update"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "765:15:10"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1884,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "825:0:10"
+            },
+            "scope": 1911,
+            "src": "740:309:10",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1922,
+        "src": "672:379:10"
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 1912,
+              "name": "UpdatableProxyShared",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1911,
+              "src": "1094:20:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_UpdatableProxyShared_$1911",
+                "typeString": "contract UpdatableProxyShared"
+              }
+            },
+            "id": 1913,
+            "nodeType": "InheritanceSpecifier",
+            "src": "1094:20:10"
+          }
+        ],
+        "contractDependencies": [
+          1782,
+          1836,
+          1851,
+          1911
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1921,
+        "linearizedBaseContracts": [
+          1921,
+          1911,
+          1851,
+          1836,
+          1782
+        ],
+        "name": "UpdatableProxyImplementation",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 1919,
+              "nodeType": "Block",
+              "src": "1162:2:10",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 1920,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "30",
+                    "id": 1916,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "1159:1:10",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_0_by_1",
+                      "typeString": "int_const 0"
+                    },
+                    "value": "0"
+                  }
+                ],
+                "id": 1917,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 1915,
+                  "name": "ProxyOwnableData",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 1836,
+                  "src": "1142:16:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_ProxyOwnableData_$1836_$",
+                    "typeString": "type(contract ProxyOwnableData)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1142:19:10"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1914,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1132:2:10"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 1918,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1162:0:10"
+            },
+            "scope": 1921,
+            "src": "1121:43:10",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1922,
+        "src": "1053:113:10"
+      }
+    ],
+    "src": "0:1166:10"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.0",
+  "updatedAt": "2018-08-23T13:34:27.983Z"
+}

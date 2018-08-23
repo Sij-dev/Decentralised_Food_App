@@ -61,7 +61,7 @@ class SignUpForm extends Component {
           <img src={`https://ipfs.io/ipfs/${this.state.ipfsHash}`} alt=""/>
           <input type='file' onChange={this.captureFile.bind(this)} />
           <br />
-          <h5> Submit button will be enabled after image uploaded in to IPFS </h5>
+          <h5> Loading .. Submit button will be enabled after image uploaded in to IPFS </h5>
           <button type="submit" disabled={!this.state.ipfsHash} className="pure-button pure-button-primary">Sign Up</button>
         </fieldset>
       </form>
