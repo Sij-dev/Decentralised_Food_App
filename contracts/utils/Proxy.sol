@@ -2,11 +2,9 @@ pragma solidity ^0.4.24;
 
 /**
  * @title ProxyData
- * @dev This is Proxy-firendly storage layout for generic proxy contract to seperate 
- * data and logic
- * ref : https://blog.gnosis.pm/solidity-delegateproxy-contracts-e09957d0f201
+ * @dev This is Proxy-firendly storage layout by seperating data and logic
+ * implemented genereic proxy layout.
  */
-
 contract ProxyData {
     address internal masterCopy;        // holds the master copy address 
 }
@@ -21,8 +19,8 @@ contract ProxyData {
 contract Proxy is ProxyData {
 
     /** @dev Constructor function sets address of master copy contract.
-        * @param _masterCopy Master copy address.
-        */
+     * @param _masterCopy Master copy address.
+     */
     constructor(address _masterCopy)
         public
     {

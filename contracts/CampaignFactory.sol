@@ -1,3 +1,10 @@
+/**
+ * @description  FoodForAll factory contract 
+ * @author SijeshP <sijesh.poovalapil@gmail.com>
+ * @dev purpose of this contract to hide the base implementation behinde a facade so that user get a
+ * consistant interface for creating campaign contract. Also get a summary details from this factory contract
+ */
+
 pragma solidity ^0.4.24;
 
 import "./FfaCampaign.sol";
@@ -14,7 +21,6 @@ contract CampaignFactory is UserMgmt {
     // Campaign contracts
     FoodForAllCampaign private foodForAllCampaignMasterCopy;
     address[] private deployedFoodCampaigns;
-    //mapping (address => address[] ) userContractMap; // TODO - delete function to be implemented.
 
     // Events broadcasted by the factory contract / Log events
     event CampaignCreation(
@@ -23,6 +29,8 @@ contract CampaignFactory is UserMgmt {
         FoodForAllCampaign newCampaignProxyAddr, 
         uint quantity
     );
+
+    // to log event whenever a master contract update 
     event ContractUpdatedInFactory(address indexed contractOwner, uint time);
     
     /** 
@@ -88,6 +96,7 @@ contract CampaignFactory is UserMgmt {
         emit ContractUpdatedInFactory(msg.sender, now);
     }
 
+    //retrives all the deployed campaigns
     function getAllDeployedFoodCampaigns() 
         public 
         view 
@@ -96,10 +105,12 @@ contract CampaignFactory is UserMgmt {
         return deployedFoodCampaigns;
     }
 
+    //retrives deployed campaigns with index
     function getDeployedFoodCampaignWithIndex(uint index) public view returns (address) {
         return deployedFoodCampaigns[index];
     }
 
+    //get total deployed campaigns
     function getTotalDeployedFoodCampaigns()  
         public 
         view 

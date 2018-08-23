@@ -33,7 +33,10 @@ npm-debug.log
 build/
 
 # lol macs
-.DS_Store/
+.DS_Store
 
 # truffle
 .node-xmlhttprequest-*
+
+#git ignore itself
+.gitignore

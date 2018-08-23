@@ -31,13 +31,7 @@ contract UpdatableProxyShared is ProxyData, ProxyOwnable {
 
     }
 }
-// contract UpdatableProxy is Proxy, UpdatableProxyShared {
-//     constructor(address masterCopy, address owner)
-//         public
-//         Proxy(masterCopy)
-//         OwnableData(owner)
-//     {}
-// }
+
 contract UpdatableProxyImplementation is UpdatableProxyShared {
     constructor() public ProxyOwnableData(0) {}
 }

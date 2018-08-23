@@ -1,11 +1,5 @@
-pragma solidity ^0.4.11;
-
-import "./Utils/Proxy.sol";
-import "./Utils/UpdatableProxy.sol";
-import "zeppelin/contracts/lifecycle/Pausable.sol";
-
 /**
- * @title FoodForAllCampaign (ffa)
+ * @description  FoodForAll base contract
  * @author SijeshP <sijesh.poovalapil@gmail.com>
  * @dev The purpse of this contract is to create a decentralised food distribution system
  * for the people who are struggling to get for food to stay alive.
@@ -23,6 +17,13 @@ import "zeppelin/contracts/lifecycle/Pausable.sol";
  * upgrade is possible by migrating data. 
  * CAUTION: storage must be aligned while writing the upgrade contract.
  */
+
+
+pragma solidity ^0.4.11;
+
+import "./Utils/Proxy.sol";
+import "./Utils/UpdatableProxy.sol";
+import "zeppelin/contracts/lifecycle/Pausable.sol";
 
 
 /** @title FoodForAllCampaignHeader 
@@ -209,14 +210,14 @@ contract FoodForAllCampaign is UpdatableProxyImplementation,FoodForAllCampaignDa
         emit FoodDeliveryPickUpTimeSet(msg.sender, deliveryPickTime);
     }
    
-    // set the contract state to delivery ack.
+    // set the contract state to food ready for delivery. Restrict for only the prouducer
     function setFoodReadyForDelivery() public {
         require(msg.sender == producerAddress,"Only producer should udate this status");
         status = ContractStatus.FoodReadyForDelivery;
         emit FfaStatusChange(msg.sender,status);
     }
 
-    // set the contract state to delivery ack. After that we can not change the state.
+    // set the contract state to out for delivery . Restrict for only the producer and delivery person
     function setFoodOutForDelivery() public {
         require(
             (msg.sender == producerAddress) || 
@@ -227,14 +228,14 @@ contract FoodForAllCampaign is UpdatableProxyImplementation,FoodForAllCampaignDa
         emit FfaStatusChange(msg.sender,status);
     }
 
-    // set the contract state to delivery ack. After that we can not change the state.
+    // set the contract state to delivered status.Restrict for only the delivery person
     function setFoodDelivered() public {
         require(msg.sender == deliveryPersonAddress,"Only delivery person should udate this status");
         status = ContractStatus.FoodDelivered;
         emit FfaStatusChange(msg.sender,status);
     }
 
-    // set the contract state to delivery ack. After that we can not change the state.
+    // set the contract state to delivery ack. Restrict for only the requester and owner(incase requester not updated.)
     function setFoodDeliveryAcknowledge() public {
         require(
             (msg.sender == requesterAddress) ||
@@ -310,7 +311,6 @@ contract FoodForAllCampaign is UpdatableProxyImplementation,FoodForAllCampaignDa
         return(requesterAddress, requesterName);
     }
 
-    // Food producer / supplier details get functions
     function getFfaProducerAddress() public view returns (address) {
         return producerAddress;
     }
@@ -327,7 +327,6 @@ contract FoodForAllCampaign is UpdatableProxyImplementation,FoodForAllCampaignDa
         return(producerAddress, producerName, productionReadyTime);
     }
 
-      // Food delivery details get functions
     function getFfaDeliveryPersonAddress() public view returns (address) {
         return deliveryPersonAddress;
     }

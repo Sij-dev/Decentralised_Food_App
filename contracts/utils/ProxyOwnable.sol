@@ -1,6 +1,10 @@
 pragma solidity ^0.4.24;
 
-//Standard ownable contract , Keeps Data and logic seprate for proxy friendly and upgradability 
+/**
+ * @title ProxyOwnableData
+ * Standard ownable contract , Keeps Data and logic seprate for proxy friendly 
+ * this will enable us to provide in place upgradability.
+ */
 contract ProxyOwnableData {
 
     address internal upgradeOwner;
@@ -17,7 +21,11 @@ contract ProxyOwnableData {
     }
 }
 
-//Standard ownable contract , Kept Data in another contract seperately. Implement owner transfer functionality
+/**
+ * @title ProxyOwnable
+ * Standard ownable contract ,
+ * Implement owner transfer functionality
+ */
 contract ProxyOwnable is ProxyOwnableData {
     function setOwner(address newupgradeOwner)
         public
