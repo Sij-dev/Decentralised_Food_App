@@ -1,6 +1,6 @@
 # Design Patterns Decisions
  
- Objective of this document is to explain the design patterns used in the “FoodForAll decentralized application smart contracts and the reason for choosing the particular pattern.
+ Objective of this document is to explain the design patterns used in the “FoodForAll" decentralized application smart contracts and the reason for choosing the particular pattern.
 
 ### Factory contract pattern
 

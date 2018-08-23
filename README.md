@@ -49,8 +49,8 @@ access the app in  http://localhost:3000
 ```
 > truffle test
 ```
-## Operational workflow
-This is the basic front end operational procedure to interact with the localy deploye contract(ganache-cli). 
+## Operational Workflow
+This is the basic front end operational procedure to interact with the localy deployed contract(ganache-cli). 
 
 ![alt text](https://github.com/Sij-dev/FoodForAll/blob/master/docs/FFA_CampaignWorkflow.png)
 
@@ -58,7 +58,7 @@ This is the basic front end operational procedure to interact with the localy de
 1.	User signup 
     - User needs to provide user name ( address picks up from metamask)
     - Avatar-profile pic ( uploads to IPFS – Demonstrate IPFS capabilities) 
-    - Once IPFS upload over, User can submit the form. ( Submit button will be enabled only after upload is completed.Upload time varies depends on image size. Sometimes IPFS takes significant amount of time to upload.In that case you can commnet the IPFS related code in “./src/user/ui/signupform/SignUpForm.js”. )
+    - Once IPFS upload over, User can submit the form. ( Submit button will be enabled only after upload is completed.Upload time varies depends on image size. Sometimes IPFS takes significant amount of time to upload.In that case you can comment the IPFS related code in “./src/user/ui/signupform/SignUpForm.js”. )
   
 
 2.	User Login
@@ -140,7 +140,7 @@ FFACampain implements following workflow functionalities,
 
 #### Factory Contract
 
-Factory contract creates FFACampign and track the deployed contracts. This uses FFACampaignProxy (initialisation logic of FFACampaign implemented in proxy contract) to create new FFACampaigns. Factor contracts also manges the users access using UserMgmt contract. (Pleae refer Design diagrams)
+Factory contract creates FFACampign and track the deployed contracts. This uses FFACampaignProxy (initialisation logic of FFACampaign implemented in proxy contract) to create new FFACampaigns. Factory contract also manages the users access using UserMgmt contract. (Pleae refer Design diagrams)
 
 ##### CampaignFactor and UserMgmt Design Diagram
 
@@ -151,4 +151,4 @@ User creation,updation, deletions and dapp logins are managed by UserMgmt contra
 
 #### UpgradedCampaign
 
-UpgradeCampaign.sol contains “FoodForAllCampaign2” contract which is an upgrade version of “FoodForAllCampaign”. This is an in place upgrade and upgrade capabiliites are demonstrated using testcase implemented in “test\Upgrade\ testContractUpgrade.js”. The upgraded contracts contains additional data field and logics. Migration capabilities has been implimented using “Update” interface. 
+UpgradeCampaign.sol contains “FoodForAllCampaign2” contract which is an upgrade version of “FoodForAllCampaign”. This is an in place upgrade and upgrade capabilities are demonstrated using testcase implemented in “test\Upgrade\ testContractUpgrade.js”. The upgraded contracts contains additional data field and logics. Migration capabilities has been implimented using “Update” interface. 

@@ -8,7 +8,7 @@ Objective of this document is to explain the measures taken to avoid common atta
 
 ### Recursive call
 - Limited externally accessible storage variables. Most of critical storage variables are either private or internal.
-- Very limited external accessable function(external, public) calls implemented considering the project requirements.
+- Very limited external accessible function(external, public) calls implemented considering the project requirements.
 
 ### Integer arithmetic overflow
 - Used require() in integer arithmetic functionalities to avoid overflow/underflow.
@@ -29,7 +29,7 @@ Objective of this document is to explain the measures taken to avoid common atta
 
 ### Powerful contract administration
 
-This is a know issue in the current implementation. Needs to implement mutisig contract owner and Programmable upgrade policies using “Timedupdatable” (TODO)
+This is a known issue in the current implementation. Needs to implement mutisig contract owner and Programmable upgrade policies using “Timedupdatable” (TODO)
 
 
 
