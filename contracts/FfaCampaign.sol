@@ -335,7 +335,7 @@ contract FoodForAllCampaign is UpdatableProxyImplementation,FoodForAllCampaignDa
         return deliveryPersonName;
     }
 
-    function getFfaDeliveryPickTime() public returns (uint) {
+    function getFfaDeliveryPickTime() public view returns (uint) {
         return deliveryPickTime;
     }
 

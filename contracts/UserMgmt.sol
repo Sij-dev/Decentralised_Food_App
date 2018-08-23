@@ -115,6 +115,7 @@ contract UserMgmt is Pausable {
         address recordToMove = userIndex[userIndex.length-1];
         userIndex[indexToDelete] = recordToMove;
         userIndex.length--;
+        return true;
     }
 
     /** 
@@ -202,11 +203,11 @@ contract UserMgmt is Pausable {
         )
     {
         return (
-            users[msg.sender].userName, 
-            users[msg.sender].userEmail,
-            users[msg.sender].userPhoneNo,
-            users[msg.sender].avatarIpfsHash, 
-            users[msg.sender].userId
+            users[userAddress].userName, 
+            users[userAddress].userEmail,
+            users[userAddress].userPhoneNo,
+            users[userAddress].avatarIpfsHash, 
+            users[userAddress].userId
         ); 
     }
     
