@@ -50,7 +50,7 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
-    "ipfs-api": "^22.2.4",
+    "ipfs-api": "github:atfornes/js-ipfs-api#transpiled",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-redux": "^5.0.2",
