@@ -70,7 +70,7 @@ class NewCampaign extends Component {
                     component={this.renderField}
                 /> 
                 <Field 
-                    label="Delivery date and time ( t+30 days)"
+                    label="Delivery date and time (max t+30 days)"
                     name="time"
                     component={this.renderDateField}
                 /> 
