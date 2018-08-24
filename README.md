@@ -43,7 +43,7 @@ connect metamask to this blockchain network
 > truffle migrate
 > npm run start
 ```
-access the app in  http://localhost:3000
+access the app in  http://localhost:3000 or in heroku https://food4all.herokuapp.com/
 
 #### Smart contract test
 ```
