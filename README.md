@@ -43,7 +43,9 @@ connect metamask to this blockchain network
 > truffle migrate
 > npm run start
 ```
-access the app in  http://localhost:3000 or in heroku https://food4all.herokuapp.com/
+access the app in  http://localhost:3000 
+
+To interact with deployed contract in rinkeby, connect metamask to rinkeby and access deployed app in heroku https://food4all.herokuapp.com/
 
 #### Smart contract test
 ```
