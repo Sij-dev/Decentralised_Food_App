@@ -45,7 +45,7 @@ connect metamask to this blockchain network
 ```
 access the app in  http://localhost:3000 
 
-To interact with deployed contract in rinkeby, connect metamask to rinkeby and access deployed app in heroku https://food4all.herokuapp.com/
+To interact with deployed contract in rinkeby, connect metamask to rinkeby and access deployed app in heroku https://food4app.herokuapp.com/
 
 #### Smart contract test
 ```
