@@ -52,11 +52,11 @@ To interact with deployed contract in rinkeby, connect metamask to rinkeby and a
 > truffle test
 ```
 ## Operational Workflow
-This is the basic front end operational procedure to interact with the localy deployed contract(ganache-cli). 
+This is the basic operational procedure to interact with the localy deployed contract(ganache-cli). 
 
 ![alt text](https://github.com/Sij-dev/FoodForAll/blob/master/docs/FFA_CampaignWorkflow.png)
 
-## Operational procedure
+## Operational procedure - frontend
 1.	User signup 
     - User needs to provide user name ( address picks up from metamask)
     - Avatar-profile pic ( uploads to IPFS – Demonstrate IPFS capabilities) 
