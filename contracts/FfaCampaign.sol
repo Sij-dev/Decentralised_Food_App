@@ -21,8 +21,8 @@
 
 pragma solidity ^0.4.11;
 
-import "./Utils/Proxy.sol";
-import "./Utils/UpdatableProxy.sol";
+import "./utils/Proxy.sol";
+import "./utils/UpdatableProxy.sol";
 import "zeppelin/contracts/lifecycle/Pausable.sol";
 
 
